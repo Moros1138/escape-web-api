@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>LeaderBoard | Escape The Machine</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/main.css'>
+</head>
+<body>
+    <button id="get">Get</button>
+    <div class="container">
+        <h1>Normal Leaderboard</h1>
+        <div id="normal-scores" class="scores"></div>
+
+        <h1>Encore Leaderboard</h1>
+        <div id="encore-scores" class="scores"></div>
+    </div>    
+
+    <div id="controls">
+        <div class="handle"></div>
+        <fieldset>
+            <legend>Let's Do Some Testing</legend>
+            <p>
+                <label for="player-name">Name:</label>
+                <input class="input" type="text" name="player-name" id="player-name" placeholder="Player Name">
+            </p>
+            <p>
+                <label for="player-time">Time:</label>
+                <input class="input" type="text" name="player-time" id="player-time" placeholder="5000">
+            </p>
+            <p>
+                <label for="player-mode">Mode:</label>
+                <select class="input" name="player-mode" id="player-mode">
+                    <option value="normal">Normal</option>
+                    <option value="encore">Encore</option>
+                </select>
+            </p>
+            <p>
+                <button type="button" id="btn-post-score">Post Score</button>
+            </p>
+            <p>
+                <button type="button" id="btn-delete-score">Delete Scores</button>
+            </p>
+        </fieldset>
+    </div>
+
+    
+    <script src='assets/main.js'></script>
+</body>
+</html>

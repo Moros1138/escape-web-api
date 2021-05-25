@@ -1,0 +1,84 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: #234;
+    color: #fff;
+}
+
+body {
+    padding-bottom: 5rem;
+}
+
+.container {
+    display: block;
+    max-width: 60rem;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.6rem;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+.scores p {
+    padding: 0.5rem;
+    border: 0.1rem solid #000;
+}
+
+.scores ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.scores ul li {
+    display: block;
+    padding: 0.5rem;
+    border: 0.1rem solid #000;
+    border-bottom: 0;
+}
+
+.scores ul li:last-child {
+    border-bottom: 0.1rem solid #000;
+}
+
+#controls {
+    display: block;
+    position: fixed;
+    right: -50%;
+    bottom: 0;
+    width: 50%;
+    background: #333;
+    color: #fff;
+}
+
+#controls.shown {
+    right: 0;
+}
+
+#controls .handle {
+    position: absolute;
+    background: #ededed;
+    border-radius: 0.4rem 0 0 0.4rem;
+    width: 4rem;
+    height: 3rem;
+    bottom: 3rem;
+    left: -4rem;
+}
+
+#controls .handle:hover {
+    cursor: pointer;
+}
+
+p label {
+    display: block;
+}
+
+p .input,
+button {
+    width: 100%;
+    font-size: 1.6rem;
+}
+
