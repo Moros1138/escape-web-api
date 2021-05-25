@@ -53,6 +53,9 @@ class EscapeAPI
         $this->Load();
 
         Flight::map('notFound', [ $this, 'not_found' ]);
+        
+        // Preflight.. gah!
+        Flight::route('OPTIONS *', function() { Flight::json(["status_code" => 200,"message" => "preflight is a bitch!"], 200); });
 
         Flight::route('GET /count(/@mode(/@submode))', [ $this, 'get_count' ]);
         Flight::route('POST /count/@mode/@submode', [ $this, 'update_count' ]);
