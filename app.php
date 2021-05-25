@@ -61,6 +61,14 @@ class EscapeAPI
         Flight::route('POST /scores/@mode', [ $this, 'update_scores' ]);
         Flight::route('DELETE /scores', [ $this, 'delete_scores' ]);
 
+        // header set X-XSS-Protection "1; mode=block"
+        header("Access-Control-Max-Age: 1728000");
+        header("Access-Control-Allow-Origin: \"*\"");
+        header("Access-Control-Allow-Methods: \"GET,POST,OPTIONS,DELETE,PUTe,CacheControl\"");
+        header("Access-Control-Allow-Headers: \"DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control\"");
+        header("Access-Control-Allow-Credentials: true");
+
+
         Flight::start();
         
         // release lock
