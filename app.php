@@ -68,7 +68,7 @@ class EscapeAPI
         header("Access-Control-Max-Age: 1728000");
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET,POST,OPTIONS,DELETE,PUT");
-        header("Access-Control-Allow-Headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control");
+        header("Access-Control-Allow-Headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Authorization");
         header("Access-Control-Allow-Credentials: true");
 
 
