@@ -292,6 +292,7 @@ class EscapeAPI
         
         // default data
         $this->DefaultData();
+        $this->Save();
     }
     
     private function DefaultData()
