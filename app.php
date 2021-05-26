@@ -71,7 +71,6 @@ class EscapeAPI
         header("Access-Control-Allow-Headers: Content-Type,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Authorization");
         header("Access-Control-Allow-Credentials: true");
 
-
         Flight::start();
         
         // release lock
@@ -122,9 +121,6 @@ class EscapeAPI
         $valid_modes = [ 'normal', 'encore' ];
         $valid_submodes = [ 'main', 'survival', 'time' ];
 
-        // $request = Flight::request();
-        // $data = $request->data->getData();
-        
         if( $this->FilterParams($valid_modes, $mode) &&
             $this->FilterParams($valid_submodes, $submode))
         {
@@ -161,30 +157,38 @@ class EscapeAPI
         $data = $request->data->getData();
 
         // ensure required data exists
-        if(!isset($data['name']) || !isset($data['time']))
+        if(!isset($data['name']) || !isset($data['minutes']) || !isset($data['seconds']) || !isset($data['milliseconds']))
         {
             Flight::json(['status_code' => 400, 'message' => 'invalid data'], 400);
             return;
         }
 
         // ensure time is of integer type
-        if(!is_int($data['time']))
-            $data['time'] = intval($data['time']);
-        
+        if(!is_int($data['minutes']))
+            $data['minutes'] = intval($data['minutes']);
+
+        if(!is_int($data['seconds']))
+            $data['seconds'] = intval($data['seconds']);
+
+        if(!is_int($data['milliseconds']))
+            $data['milliseconds'] = intval($data['milliseconds']);
+
         $this->data['time_scores'][$mode][] = $data;
 
         // sort by time ascending
         if(count($this->data['time_scores'][$mode]) > 1)
         {
             usort($this->data['time_scores'][$mode], function($a, $b)
-            {
-                return ((int)$a['time'] > (int)$b['time']);
+            {   
+                $temp_a = ((($a['minutes'] * 60) + $a['seconds']) * 1000) + $a['milliseconds'];
+                $temp_b = ((($b['minutes'] * 60) + $b['seconds']) * 1000) + $b['milliseconds'];
+                return ($temp_a > $temp_b);
             });
         }
-    
+        
         // keep the top 10 scores
         $this->data['time_scores'][$mode] = array_splice($this->data['time_scores'][$mode], 0, 10);
-        
+
         // save updated scores
         $this->Save();
     
