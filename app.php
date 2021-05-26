@@ -62,6 +62,7 @@ class EscapeAPI
         
         Flight::route('GET /scores/@mode', [ $this, 'get_scores' ]);
         Flight::route('POST /scores/@mode', [ $this, 'update_scores' ]);
+        Flight::route('DELETE /', [ $this, 'reset_data' ]);
         Flight::route('DELETE /scores', [ $this, 'delete_scores' ]);
 
         // header set X-XSS-Protection "1; mode=block"
@@ -204,6 +205,14 @@ class EscapeAPI
         
         $this->Save();
     }
+    public function reset_data()
+    {
+        $this->AuthOrDie();
+        $this->DefaultData();
+        $this->Save();
+
+        Flight::json($this->data, 200);
+    }
 
     private function Sign($headers, $time)
     {
@@ -282,6 +291,11 @@ class EscapeAPI
         }
         
         // default data
+        $this->DefaultData();
+    }
+    
+    private function DefaultData()
+    {
         $this->data = [
             'time_scores' => [
                 'normal' => [],
@@ -297,7 +311,7 @@ class EscapeAPI
             ]
         ];
     }
-    
+
     private function Save()
     {
         file_put_contents(ABSPATH . "/data/data.json", json_encode($this->data));
