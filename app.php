@@ -138,6 +138,12 @@ class EscapeAPI
 
     public function get_scores($mode)
     {
+        if($mode != 'normal' && $mode != 'encore')
+        {
+            Flight::json(['status_code' => 400, 'message' => 'invalid mode'], 400);
+            return;
+        }
+
         Flight::json($this->data['time_scores'][$mode]);
     }
 
